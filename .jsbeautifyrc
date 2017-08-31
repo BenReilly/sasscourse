@@ -1,0 +1,17 @@
+{
+  "eol": true,
+  "indent_size": 2,
+  "css": {
+    "newline_between_rules": true
+  },
+  "html": {
+    "brace_style": "collapse,preserve-inline",
+    "max_preserve_newlines": 2,
+    "wrap_attributes": "force-aligned"
+  },
+  "js": {
+    "brace_style": "collapse,preserve-inline",
+    "max_preserve_newlines": 2,
+    "break_chained_methods": true
+  }
+}
