@@ -2,6 +2,135 @@
 $main-color: #eeaa33;
 $text-color: #333;
 $header-text-color: darken($text-color, 10%);
+$social-colors: (
+  'twitter': #1da1f2,
+  'facebook': #3b5998
+);
+$sizes: (
+  '0': 0,
+  'xs': 5px,
+  'sm': 12px,
+  '': 20px,
+  'md': 30px,
+  'lg': 60px,
+  'xl': 80px
+);
+$types: (
+  'p': 'padding',
+  'm': 'margin'
+);
+$positions: (
+  'a': '',
+  't': '-top',
+  'r': '-right',
+  'b': '-bottom',
+  'l': '-left',
+  'x': '-left' '-right',
+  'y': '-top' '-bottom'
+);
+@each $sname, $size in $sizes {
+  @each $tname, $type in $types {
+    @each $pname, $pos in $positions {
+      @if ($sname == '') {
+        .#{$tname}-#{$pname}  {
+          @each $prule in $pos {
+            #{$type}#{$prule}: $size !important;
+          }
+        }
+      } @else {
+        .#{$tname}-#{$pname}-#{$sname} {
+          @each $prule in $pos {
+            #{$type}#{$prule}: $size !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@each $name, $color in $social-colors {
+  .color-#{$name} {
+    color: $color;
+    transition: 0.3s ease color;
+    &:hover {
+      color: lighten($color, 10%);
+    }
+  }
+  .background-#{$name} {
+    background: $color;
+    color: #fff;
+    transition: 0.3s ease background;
+    &:hover {
+      background: lighten($color, 10%);
+    }
+  }
+}
+
+
+// MIXINS =======================
+@mixin border-top-radius($radius: 5px) {
+  border-top-left-radius:($radius);
+  border-top-right-radius:($radius);
+}
+
+@mixin border-bottom-radius($radius: 5px) {
+  border-bottom-left-radius:($radius);
+  border-bottom-right-radius:($radius);
+}
+
+@mixin border-left-radius($radius: 5px) {
+  border-top-left-radius:($radius);
+  border-bottom-left-radius:($radius);
+}
+
+@mixin border-right-radius($radius: 5px) {
+  border-top-right-radius:($radius);
+  border-bottom-right-radius:($radius);
+}
+
+@mixin absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@function calculateRem($size) {
+  $rem-size: $size / 16px;
+  @return $rem-size * 1rem;
+}
+
+@mixin font-size($size: 16px) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@mixin center-flex($type: 'all') {
+  display: flex;
+  @if $type == 'all' {
+    justify-content: center;
+    align-items: center;
+  }
+  @if $type == 'horizontal' {
+    justify-content: center;
+  }
+  @if $type == 'vertical' {
+    align-items: center;
+  }
+}
+
+.center-flex {
+  @include center-flex;
+}
+.center-flex-h {
+  @include center-flex(horizontal);
+}
+.center-flex-v {
+  @include center-flex(vertical);
+}
+
+
 // RESET ========================
 * {
     box-sizing: border-box;
@@ -201,12 +330,14 @@ $article-padding: 80px;
 $sidebar-width: 300px;
 .sidebar {
     width: $sidebar-width;
+
     .sidebar__box {
         margin-bottom: 29px;
         &::last-child {
             margin-bottom: 0;
         }
     }
+
     h3 {
         margin: 0 0 20px;
         color: lighten($text-color, 20%);
@@ -214,9 +345,26 @@ $sidebar-width: 300px;
         font-size: 14px;
         font-weight: 300;
     }
+
     img {
         max-width: 100%;
     }
+
+    .share-buttons {
+      @include center-flex;
+    }
+}
+
+// SHARE BUTTONS ===========
+.share-button {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+
+  &:first-child {
+    margin-right: 8px;
+  }
 }
 
 // TABLE OF CONTENTS =======
