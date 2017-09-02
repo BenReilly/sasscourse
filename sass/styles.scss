@@ -66,7 +66,6 @@ $positions: (
   }
 }
 
-
 // MIXINS =======================
 @mixin border-top-radius($radius: 5px) {
   border-top-left-radius:($radius);
@@ -213,9 +212,6 @@ body {
     .article__inner {
         background: #fff;
     } // end article inner
-    // ARTICLE FOOTER
-    .article__footer {}
-    // end article footer
 }
 
 // end article
@@ -296,7 +292,6 @@ $article-padding: 80px;
             margin-right: 0;
         }
     }
-    .byline__author {}
 }
 
 // end byline
@@ -314,7 +309,7 @@ $article-padding: 80px;
         border: 3px solid #fff;
         border-radius: 5px;
         padding: 20px 40px;
-        trasition: 0.3s ease background, 0.3s ease border-radius;
+        transition: 0.3s ease background, 0.3s ease border-radius;
         &:hover {
             background: lighten($main-color, 10%);
             border-radius: 0;
